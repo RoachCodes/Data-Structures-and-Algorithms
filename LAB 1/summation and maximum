@@ -1,0 +1,41 @@
+#PythonCode
+def summation(arr):
+    # Calculate the sum of the integers in the array
+    return sum(arr)
+
+def maximum(arr):
+    # Find the maximum integer in the array
+    return max(arr)
+
+def main():
+    # Get the length of the array from the user
+    n = int(input("Enter the length of the array: "))
+
+    # Declare an empty array of length n
+    arr = []
+
+    # Allow the user to enter n integers and store them in the array
+    for i in range(n):
+        num = int(input(f"Enter integer {i + 1}: "))
+        arr.append(num)
+
+    # Call the summation function and display its output
+    print("Sum of the integers:", summation(arr))
+
+    # Call the maximum function and display its output
+    print("Maximum integer in the array:", maximum(arr))
+
+if __name__ == "__main__":
+    main()
+
+#ExampleUsage
+Enter the length of the array: 4
+Enter integer 1: 12
+Enter integer 2: 5
+Enter integer 3: 8
+Enter integer 4: 15
+
+#Output
+Sum of the integers: 40
+Maximum integer in the array: 15
+
