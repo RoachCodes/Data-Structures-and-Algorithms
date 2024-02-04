@@ -1,0 +1,27 @@
+#Python CODE
+def containsDuplicate(nums):
+    # Create a set to store unique elements
+    seen = set()
+
+    # Iterate through the array
+    for num in nums:
+        # If the element is already in the set, it's a duplicate
+        if num in seen:
+            return True
+        # Otherwise, add it to the set
+        else:
+            seen.add(num)
+
+    # If the loop completes without finding duplicates, return False
+    return False
+
+# Example usage:
+nums = [1, 2, 3, 4, 5]
+print("Contains duplicates?", containsDuplicate(nums))
+
+nums_with_duplicates = [1, 2, 3, 4, 1]
+print("Contains duplicates?", containsDuplicate(nums_with_duplicates))
+
+# Output
+Contains duplicates? False
+Contains duplicates? True
