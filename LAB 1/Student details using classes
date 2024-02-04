@@ -1,0 +1,180 @@
+//C++ CODE
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Define the Course class
+class Course {
+public:
+    string course_code;
+    string course_name;
+};
+
+// Define the Grade class
+class Grade {
+public:
+    int mark;
+    char the_grade;
+    bool calculated;
+
+    // Constructor
+    Grade() : calculated(false) {}
+
+    // Function to calculate grade based on mark
+    void calculateGrade() {
+        if (mark > 69) the_grade = 'A';
+        else if (mark > 59) the_grade = 'B';
+        else if (mark > 49) the_grade = 'C';
+        else if (mark > 39) the_grade = 'D';
+        else the_grade = 'E';
+        calculated = true;
+    }
+};
+
+// Define the Student class
+class Student {
+public:
+    string reg_number;
+    string name;
+    int age;
+    Course course;
+    Grade grades;
+
+    // Function to edit student details
+    void editDetails() {
+        cout << "Enter new details for the student:\n";
+        cout << "Name: ";
+        cin.ignore();
+        getline(cin, name);
+        cout << "Age: ";
+        cin >> age;
+        cout << "Course Code: ";
+        cin >> course.course_code;
+        cout << "Course Name: ";
+        cin.ignore();
+        getline(cin, course.course_name);
+    }
+};
+
+int main() {
+    const int MAX_STUDENTS = 40;
+    Student students[MAX_STUDENTS];
+    int numStudents = 0;
+    int choice;
+
+    do {
+        // Display menu
+        cout << "\nStudent Management System Menu\n";
+        cout << "1. Add a student\n";
+        cout << "2. Edit a student's details\n";
+        cout << "3. Add marks and calculate grades\n";
+        cout << "4. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch(choice) {
+            case 1: {
+                if (numStudents < MAX_STUDENTS) {
+                    cout << "\nEnter student details:\n";
+                    cout << "Registration Number: ";
+                    cin >> students[numStudents].reg_number;
+                    cout << "Name: ";
+                    cin.ignore();
+                    getline(cin, students[numStudents].name);
+                    cout << "Age: ";
+                    cin >> students[numStudents].age;
+                    cout << "Course Code: ";
+                    cin >> students[numStudents].course.course_code;
+                    cout << "Course Name: ";
+                    cin.ignore();
+                    getline(cin, students[numStudents].course.course_name);
+                    numStudents++;
+                    cout << "Student added successfully.\n";
+                } else {
+                    cout << "Maximum limit of students reached.\n";
+                }
+                break;
+            }
+            case 2: {
+                string regNumber;
+                cout << "Enter registration number of the student to edit: ";
+                cin >> regNumber;
+                for (int i = 0; i < numStudents; i++) {
+                    if (students[i].reg_number == regNumber) {
+                        students[i].editDetails();
+                        cout << "Student details updated successfully.\n";
+                        break;
+                    }
+                    if (i == numStudents - 1) {
+                        cout << "Student with registration number " << regNumber << " not found.\n";
+                    }
+                }
+                break;
+            }
+            case 3: {
+                string regNumber;
+                cout << "Enter registration number of the student: ";
+                cin >> regNumber;
+                for (int i = 0; i < numStudents; i++) {
+                    if (students[i].reg_number == regNumber) {
+                        if (!students[i].grades.calculated) {
+                            cout << "Enter mark for the student: ";
+                            cin >> students[i].grades.mark;
+                            students[i].grades.calculateGrade();
+                            cout << "Marks added and grade calculated successfully.\n";
+                        } else {
+                            cout << "Grades for this student have already been calculated and cannot be altered.\n";
+                        }
+                        break;
+                    }
+                    if (i == numStudents - 1) {
+                        cout << "Student with registration number " << regNumber << " not found.\n";
+                    }
+                }
+                break;
+            }
+            case 4:
+                cout << "Exiting program.\n";
+                break;
+            default:
+                cout << "Invalid choice. Please try again.\n";
+        }
+    } while (choice != 4);
+
+    return 0;
+}
+
+ //Example Usage
+Student Management System Menu
+1. Add a student
+2. Edit a student's details
+3. Add marks and calculate grades
+4. Exit
+Enter your choice: 1
+Enter student details:
+Registration Number: SCT212
+Name: Martin Gakumba
+Age: 20
+Course Code: SCT
+Course Name: Computer tech
+Student added successfully.Student Management System Menu
+1. Add a student
+2. Edit a student's details
+3. Add marks and calculate grades
+4. Exit
+Enter your choice: 2
+Enter registration number of the student to edit: SCT212
+Enter new details for the student:
+Name: Martin Gakumba
+Age: 22
+Course Code: SCS
+Course Name: Comp science
+Student details updated successfully.
+
+Student Management System Menu
+1. Add a student
+2. Edit a student's details
+3. Add marks and calculate grades
+4. Exit
+Enter your choice: 4
+Exiting program.
