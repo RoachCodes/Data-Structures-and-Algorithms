@@ -1,0 +1,30 @@
+#Python CODE
+def removeDuplicates(nums):
+    # Check if the array is empty or has only one element
+    if len(nums) <= 1:
+        return len(nums)
+
+    # Initialize a pointer for the unique elements
+    unique_pointer = 0
+
+    # Iterate through the array
+    for i in range(1, len(nums)):
+        # Compare the current element with the previous one
+        if nums[i] != nums[unique_pointer]:
+            # If different, update the unique_pointer and store the unique element
+            unique_pointer += 1
+            nums[unique_pointer] = nums[i]
+
+    # The length of the array without duplicates is (unique_pointer + 1)
+    return unique_pointer + 1
+
+# Example usage:
+nums = [1, 1, 2, 2, 2, 3, 4, 4, 5]
+new_length = removeDuplicates(nums)
+
+print("Original array:", nums[:new_length])
+print("New length:", new_length)
+
+#Output
+Original array: [1, 2, 3, 4, 5]
+New length: 5
