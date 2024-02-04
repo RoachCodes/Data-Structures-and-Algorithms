@@ -1,4 +1,6 @@
 # Data-Structures-and-Algorithms
+ REG NO: SCT212-0113/2022
+ NAME: MARTIN GAKUMBA
 This repo has two folders:
 1. QUIZ 1
     Has programs implemented using python and involves the use of arrays to solve various problems.
