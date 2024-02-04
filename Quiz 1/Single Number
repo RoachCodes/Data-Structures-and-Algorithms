@@ -1,0 +1,16 @@
+# Pyhton CODE
+def singleNumber(nums):
+    result = 0
+    
+    # XOR all elements in the array
+    for num in nums:
+        result ^= num
+    
+    return result
+
+# Example usage:
+nums = [4, 1, 2, 1, 2]
+print("Single number:", singleNumber(nums))
+
+# Output
+Single number: 4
