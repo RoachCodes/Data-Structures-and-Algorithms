@@ -1,0 +1,51 @@
+#include <iostream>
+
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(nullptr) {}
+};
+
+ListNode* reverseList(ListNode* head) {
+    ListNode* prev = nullptr;
+    ListNode* curr = head;
+    ListNode* nextNode = nullptr;
+    
+    while (curr != nullptr) {
+        nextNode = curr->next; // Store the next node
+        curr->next = prev; // Reverse the link
+        
+        // Move prev and curr pointers one step forward
+        prev = curr;
+        curr = nextNode;
+    }
+    
+    return prev; // New head of the reversed list
+}
+
+void printList(ListNode* head) {
+    while (head != nullptr) {
+        std::cout << head->val << " ";
+        head = head->next;
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    // Example usage
+    ListNode* head = new ListNode(1);
+    head->next = new ListNode(2);
+    head->next->next = new ListNode(3);
+    head->next->next->next = new ListNode(4);
+    head->next->next->next->next = new ListNode(5);
+    
+    std::cout << "Original list: ";
+    printList(head);
+    
+    ListNode* reversedHead = reverseList(head);
+    
+    std::cout << "Reversed list: ";
+    printList(reversedHead);
+    
+    return 0;
+}
