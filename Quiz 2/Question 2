@@ -1,0 +1,83 @@
+#include <iostream>
+
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(nullptr) {}
+};
+
+ListNode *detectCycle(ListNode *head) {
+    if (head == nullptr || head->next == nullptr) {
+        return nullptr; // No cycle if list is empty or has only one node
+    }
+    
+    ListNode *slow = head;
+    ListNode *fast = head;
+    bool cycleExists = false;
+    
+    while (fast != nullptr && fast->next != nullptr) {
+        slow = slow->next;
+        fast = fast->next->next;
+        
+        if (slow == fast) {
+            cycleExists = true;
+            break; // Cycle detected
+        }
+    }
+    
+    if (!cycleExists) {
+        return nullptr; // No cycle found
+    }
+    
+    // Move one pointer to head and iterate until they meet
+    ListNode *ptr1 = head;
+    ListNode *ptr2 = slow;
+    
+    while (ptr1 != ptr2) {
+        ptr1 = ptr1->next;
+        ptr2 = ptr2->next;
+    }
+    
+    return ptr1; // Return the node where cycle begins
+}
+
+int main() {
+    // Example usage
+    ListNode *head1 = new ListNode(3);
+    head1->next = new ListNode(2);
+    head1->next->next = new ListNode(0);
+    head1->next->next->next = new ListNode(-4);
+    head1->next->next->next->next = head1->next; // Cycle created
+    
+    ListNode *result1 = detectCycle(head1);
+    std::cout << "Example 1: ";
+    if (result1 != nullptr) {
+        std::cout << "tail connects to node index " << result1->val << std::endl;
+    } else {
+        std::cout << "no cycle" << std::endl;
+    }
+    
+    ListNode *head2 = new ListNode(1);
+    head2->next = new ListNode(2);
+    head2->next->next = head2; // Cycle created
+    
+    ListNode *result2 = detectCycle(head2);
+    std::cout << "Example 2: ";
+    if (result2 != nullptr) {
+        std::cout << "tail connects to node index " << result2->val << std::endl;
+    } else {
+        std::cout << "no cycle" << std::endl;
+    }
+    
+    ListNode *head3 = new ListNode(1); // No cycle
+    
+    ListNode *result3 = detectCycle(head3);
+    std::cout << "Example 3: ";
+    if (result3 != nullptr) {
+        std::cout << "tail connects to node index " << result3->val << std::endl;
+    } else {
+        std::cout << "no cycle" << std::endl;
+    }
+    
+    return 0;
+}
